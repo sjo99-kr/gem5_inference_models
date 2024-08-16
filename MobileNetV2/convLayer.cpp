@@ -69,7 +69,7 @@ void ConvLayer::forward(float *pfInput)
                             }
                         }
                     }
-                    if (true)
+                    if (true) // if bias parameter is not existed , then you can set false
                         fSum += m_pfBias[nOutmapIndex];
 
                     m_pfOutput[nOutputIndex] = fSum;
