@@ -79,7 +79,7 @@ void layer_bottleneck::forward(float *pfInput)
 }
 
 
-float *Layers_Ds::GetOutput()
+float *layer_bottleneck::GetOutput()
 {
     return m_ConvSepBn2->GetOutput();
 }
