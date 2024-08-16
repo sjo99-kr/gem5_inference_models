@@ -7,7 +7,7 @@
 
 using namespace std;
 
-//////////////////////////////////////////////////////////////////// set for resnet 18 ////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////// set for MobileNet-V2  ////////////////////////////////////////////////
 ConvLayer::ConvLayer(int nInputNum, int nOutputNum, int nInputWidth, int nKernelWidth, int nPad, int nStride, int group) :
     m_nInputNum(nInputNum), m_nOutputNum(nOutputNum), m_nInputWidth(nInputWidth), m_nGroup(group),
     m_nKernelWidth(nKernelWidth), m_nPad(nPad), m_nStride(nStride)
@@ -24,8 +24,8 @@ ConvLayer::ConvLayer(int nInputNum, int nOutputNum, int nInputWidth, int nKernel
     m_nOutputGroupNum = m_nOutputNum / m_nGroup; // if depth-wise convolution, m_nOutputGroupNum = 1
 
     m_pfWeight = new float[m_nOutputNum * m_nInputNum * m_nKernelSize]; // depth wise -> m_nInputGroupNum = 1, else m_nInputGroupNum = m_nInputNUm
+	
     // set weight, we can set weights by parameter files, but in gem5, Our goal is to analyze the  Inference time breakdown based on Structure of CNN Model
-  
   for(int i =0; i<m_nOutputNum * m_nInputNum * m_nKernelSize; ++i){
          m_pfWeight[i] = static_cast<float>(i);
     }
@@ -34,7 +34,6 @@ ConvLayer::ConvLayer(int nInputNum, int nOutputNum, int nInputWidth, int nKernel
         m_pfBias[i] = static_cast<float>(i);
     }
     std::cout << "conv setting on " << std::endl;
-    // read conv wb skip for just Inference experiments
 }
 
 
