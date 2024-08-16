@@ -16,7 +16,7 @@
 [3] gem5 version (v23.1.0.0)
 
 # Reference
-[1] https://github.com/universecool/mobilenet
+[1] https://github.com/universecool/mobilenet (MobileNet-V1)
 
 [2] https://arxiv.org/abs/1512.03385 (Resnet)
 
