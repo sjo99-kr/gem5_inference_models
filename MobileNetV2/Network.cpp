@@ -16,43 +16,43 @@ Network::Network()
 	cout << "Initializing Network..." << endl;
 
   // If you want to original MobileNet-V2, you can use this code.
-  // m_Layers_ds_start = new Layers_Ds(3, 32, 1, 224, 3, 2, 1), stride : 2, input : 224 x224x3 , padding : 1, kernel_size : 3, output 112x112x32
+  // m_Layers_ds_start = new Conv2d(3, 32, 1, 224, 3, 2, 1), stride : 2, input : 224 x224x3 , padding : 1, kernel_size : 3, output 112x112x32
 
 
 // bottleNeck 1, n = 1 
-    m_Layers_ds1_1 = new Layers_Ds(32, 16, 1, 112, 3, 1, 1); // input : 112x112x32, padding : 1, stride : 1 kernel_size : 3 output: 112x112x16
+    m_Layers_ds1_1 = new layer_bottleneck(32, 16, 1, 112, 3, 1, 1); // input : 112x112x32, padding : 1, stride : 1 kernel_size : 3 output: 112x112x16
 
 // BottleNeck 2,  n = 2
-    m_Layers_ds2_1 = new Layers_Ds(16, 24, 6, 112, 3, 2, 1); // input : 112x112x16, padding : 1, stride : 2, kernel_size : 3 output 56x56x24
-    m_Layers_ds2_2 = new Layers_Ds(24, 24, 6, 112, 3, 1 ,1); // input: 56x56x24, padding 1, stride: 1, kernel_size : 3 output : 56x56x24
+    m_Layers_ds2_1 = new layer_bottleneck(16, 24, 6, 112, 3, 2, 1); // input : 112x112x16, padding : 1, stride : 2, kernel_size : 3 output 56x56x24
+    m_Layers_ds2_2 = new layer_bottleneck(24, 24, 6, 112, 3, 1 ,1); // input: 56x56x24, padding 1, stride: 1, kernel_size : 3 output : 56x56x24
 
 // BottleNeck 3, n = 3
-    m_Layers_ds3_1 = new Layers_Ds(24, 32, 6, 56, 3, 2, 1); // input 56x56x24, padding : 1 stride: 2 kernel_size : 3 output: 28x28x32    
-    m_Layers_ds3_2 = new Layers_Ds(32, 32, 6, 28, 3, 1, 1); // input : 28x28x32, padding : 1 stride : 1 kernel_size : 3, output 28x28x32
-    m_Layers_ds3_3 = new Layers_Ds(32, 32, 6, 28, 3, 1, 1); // input : 28x28x32 padding : 1, stride 1 kernel_size 3 output 28x28x32
+    m_Layers_ds3_1 = new layer_bottleneck(24, 32, 6, 56, 3, 2, 1); // input 56x56x24, padding : 1 stride: 2 kernel_size : 3 output: 28x28x32    
+    m_Layers_ds3_2 = new layer_bottleneck(32, 32, 6, 28, 3, 1, 1); // input : 28x28x32, padding : 1 stride : 1 kernel_size : 3, output 28x28x32
+    m_Layers_ds3_3 = new layer_bottleneck(32, 32, 6, 28, 3, 1, 1); // input : 28x28x32 padding : 1, stride 1 kernel_size 3 output 28x28x32
 
 
 // BottleNeck 4, n = 4
-    m_Layers_ds4_1 = new Layers_Ds(32, 64, 6, 28, 3, 2, 1); //input : 28x28x32 padding : 1, stride : 2 kernel_size :3 output 14x14x64
-    m_Layers_ds4_2 = new Layers_Ds(64, 64, 6, 14, 3, 1, 1); //input : 14x14x64 padding : 1 stride: 1 kernel_size : 3, output : 14x14x64
-    m_Layers_ds4_3 = new Layers_Ds(64, 64, 6, 14, 3, 1, 1); //input : 14x14x64 padding : 1 stride: 1 kernel_size : 3, output : 14x14x64
-    m_Layers_ds4_4 = new Layers_Ds(64, 64, 6, 14, 3, 1, 1);  //input : 14x14x64 padding : 1 stride: 1 kernel_size : 3, output : 14x14x64
+    m_Layers_ds4_1 = new layer_bottleneck(32, 64, 6, 28, 3, 2, 1); //input : 28x28x32 padding : 1, stride : 2 kernel_size :3 output 14x14x64
+    m_Layers_ds4_2 = new layer_bottleneck(64, 64, 6, 14, 3, 1, 1); //input : 14x14x64 padding : 1 stride: 1 kernel_size : 3, output : 14x14x64
+    m_Layers_ds4_3 = new layer_bottleneck(64, 64, 6, 14, 3, 1, 1); //input : 14x14x64 padding : 1 stride: 1 kernel_size : 3, output : 14x14x64
+    m_Layers_ds4_4 = new layer_bottleneck(64, 64, 6, 14, 3, 1, 1);  //input : 14x14x64 padding : 1 stride: 1 kernel_size : 3, output : 14x14x64
     
 // BottleNeck 5, n =3
-    m_Layers_ds5_1 = new Layers_Ds(64, 96, 6, 14, 3, 1, 1); //input : 14x14x64 padding : 1, stride : 1 kernel_size :3 output 14x14x96
-    m_Layers_ds5_2 = new Layers_Ds(96, 96, 6, 14, 3, 1, 1); //input : 14x14x96 padding : 1 stride: 1 kernel_size : 3, output : 14x14x96
-    m_Layers_ds5_3 = new Layers_Ds(96, 96, 6, 14, 3, 1, 1); //input : 14x14x96 padding : 1 stride: 1 kernel_size : 3, output : 14x14x96
+    m_Layers_ds5_1 = new layer_bottleneck(64, 96, 6, 14, 3, 1, 1); //input : 14x14x64 padding : 1, stride : 1 kernel_size :3 output 14x14x96
+    m_Layers_ds5_2 = new layer_bottleneck(96, 96, 6, 14, 3, 1, 1); //input : 14x14x96 padding : 1 stride: 1 kernel_size : 3, output : 14x14x96
+    m_Layers_ds5_3 = new layer_bottleneck(96, 96, 6, 14, 3, 1, 1); //input : 14x14x96 padding : 1 stride: 1 kernel_size : 3, output : 14x14x96
 
 // BottleNeck 6, n = 3;
-    m_Layers_ds6_1 = new Layers_Ds(96, 160, 6, 14, 3, 2, 1); //input : 14x14x96 padding : 1, stride : 2 kernel_size :3 output 7x7x160
-    m_Layers_ds6_2 = new Layers_Ds(160, 160, 6, 7, 3, 1, 1); //input : 7x7x160 padding : 1 stride: 1 kernel_size : 3, output : 7x7x160
-    m_Layers_ds6_3 = new Layers_Ds(160, 160, 6, 7, 3, 1, 1); //input : 7x7x160 padding : 1 stride: 1 kernel_size : 3, output : 7x7x160
+    m_Layers_ds6_1 = new layer_bottleneck(96, 160, 6, 14, 3, 2, 1); //input : 14x14x96 padding : 1, stride : 2 kernel_size :3 output 7x7x160
+    m_Layers_ds6_2 = new layer_bottleneck(160, 160, 6, 7, 3, 1, 1); //input : 7x7x160 padding : 1 stride: 1 kernel_size : 3, output : 7x7x160
+    m_Layers_ds6_3 = new layer_bottleneck(160, 160, 6, 7, 3, 1, 1); //input : 7x7x160 padding : 1 stride: 1 kernel_size : 3, output : 7x7x160
     
 // BottleNeck 7, n =1;
-    m_Layers_ds7_1 = new Layers_Ds(160, 320, 6, 7, 3, 1, 1); // input : 7x7x160 padding : 1, stride : 1, kernel_size : 3, output : 7x7x320
+    m_Layers_ds7_1 = new layer_bottleneck(160, 320, 6, 7, 3, 1, 1); // input : 7x7x160 padding : 1, stride : 1, kernel_size : 3, output : 7x7x320
 
 // BottleNeck 8, n = 1;
-    m_Layers_ds8_1 = new Layers_Ds(320,1280, 6, 7, 3, 1, 1); // input 7x7x320 padding 1, stride 1, kernel_size :3 , output 7x7x1280
+    m_Layers_ds8_1 = new layer_bottleneck(320,1280, 6, 7, 3, 1, 1); // input 7x7x320 padding 1, stride 1, kernel_size :3 , output 7x7x1280
     
     
     m_Poollayer9 = new GlobalPoolLayer(1280, 7); // input 7x7x1280, output : 1280
