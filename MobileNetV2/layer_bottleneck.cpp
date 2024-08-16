@@ -38,7 +38,7 @@ layer_bottleneck::layer_bottleneck(int nInputNum, int nOutputNum, int nExpansion
 
 
 
-void Layers_Ds::forward(float *pfInput)
+void layer_bottleneck::forward(float *pfInput)
 {
     std::cout<<"conv1" <<std::endl;
     m_ConvlayerSep1->forward(pfInput);
