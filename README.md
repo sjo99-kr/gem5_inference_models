@@ -1,11 +1,9 @@
 #  modern CNN Models for GEM5 SE mode
 
-
-### You can changes the models what you wanna do.
-
-### Post CNN Models (MobileNetV2, ResNet-18, ResNet-50)
-### If you wanna see MobileNetV1, https://github.com/universecool/mobilenet)
-
+### CNN Models 
+1. MobileNet, MobileNetV2
+2. ResNet-18/50
+3. DenseNet
 
 
 # Environment
