@@ -1,4 +1,4 @@
-#  CNN Model structures for GEM5 SE mode
+#  modern CNN Models for GEM5 SE mode
 
 
 ### You can changes the models what you wanna do.
